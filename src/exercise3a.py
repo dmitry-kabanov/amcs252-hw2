@@ -1,3 +1,4 @@
+import sys
 import numpy as np
 import fivepointlaplaciansparse as laplaceSparse
 
@@ -24,10 +25,10 @@ def getBottomBc(x):
 def getTopBc(x):
     return np.zeros(x.shape)
 
-m = 4000
+m = int(sys.argv[1])
 bcs = dict([
     ('left', getLeftBc),
     ('right', getRightBc),
     ('bottom', getBottomBc),
     ('top', getTopBc)])
-laplaceSparse.solve(m, computeRhs, bcs)
+laplaceSparse.solve(m, computeRhs, bcs, True)
