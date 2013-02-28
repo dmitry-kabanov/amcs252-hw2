@@ -37,7 +37,8 @@ def solve(m, computeRhs, bcs, plot = False, filename = ''):
         plt.colorbar()
         plt.xlabel(r'$x$')
         plt.ylabel(r'$y$')
-        plt.savefig(filename)
+        if filename:
+            plt.savefig(filename)
         plt.show()
 
     return sol, X, Y
