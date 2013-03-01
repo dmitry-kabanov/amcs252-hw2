@@ -31,4 +31,4 @@ bcs = dict([
     ('right', getRightBc),
     ('bottom', getBottomBc),
     ('top', getTopBc)])
-laplaceNonSparse.solve(m, computeRhs, bcs, True)
+laplaceNonSparse.solve(m, computeRhs, bcs)

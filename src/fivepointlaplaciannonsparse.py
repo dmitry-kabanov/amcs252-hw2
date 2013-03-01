@@ -1,5 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
 
 
 def getMatrix(m):
@@ -31,6 +30,7 @@ def solve(m, computeRhs, bcs, plot = False, filename = ''):
 
     # Plot solution.
     if plot:
+        import matplotlib.pyplot as plt
         plt.clf()
         plt.pcolor(X,Y,sol)
         plt.colorbar()
