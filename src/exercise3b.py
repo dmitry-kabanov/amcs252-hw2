@@ -31,7 +31,16 @@ bcs = dict([
     ('right', getRightBc),
     ('bottom', getBottomBc),
     ('top', getTopBc)])
-laplaceSparse.solve(m, computeRhs, bcs, True, '../../images/e3b-solution.png')
+_, X, Y = laplaceSparse.solve(
+    m, computeRhs, bcs, True, '../../images/e3b-solution.png')
+exactSolution = X**2 * np.cos(np.pi * Y)
+plt.figure()
+plt.pcolor(X,Y,exactSolution)
+plt.colorbar()
+plt.xlabel(r'$x$')
+plt.ylabel(r'$y$')
+plt.savefig('../../images/e3b-exact-solution.png')
+plt.show()
 
 mList = [50, 100, 200, 500, 1000]
 errorNormList = []
@@ -45,8 +54,11 @@ for m in mList:
     errorNormList.append(h*np.linalg.norm(error, 2))
     hList.append(h)
 
-plt.loglog(hList, errorNormList, 'b-o')
-plt.loglog(hList, [0.1*h**2 for h in hList], 'g--s')
+plt.loglog(hList, errorNormList, 'b-o', label=r'$\|\|E\|\|_2$')
+plt.loglog(hList, [0.1*h**2 for h in hList], 'g--s', label=r'$0.1h^2$')
 plt.grid(True)
+plt.xlabel(r'$h$')
+plt.ylabel(r'$\|\|E\|\|_2$')
+plt.legend(loc='best')
 plt.savefig('../../images/e3b-convergence.eps')
 plt.show()
